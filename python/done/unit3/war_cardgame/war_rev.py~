@@ -1,0 +1,125 @@
+
+from random import randint,shuffle
+
+global round_number
+
+'''Create Deck'''
+def create_deck_gen():
+    deck = []
+    complete_deck = []
+    cards = ["H", "S", "D", "C"]
+    for i in range(4):
+        deck.extend(list(range(2,15)))
+        complete_deck.extend([str(s)+" "+str(cards[i]) for s in deck])
+        del deck[:]
+    shuffle(complete_deck)
+    return complete_deck
+
+'''Player 1 wins round'''
+def player1_win(p1c,p2c,p1w,p2w):
+    p1c.append(p1c[0])
+    p1w.append(p2c[0])
+    p1c.remove(p1c[0])
+    p2c.remove(p2c[0])
+
+'''Player 2 wins round'''
+def player2_win(p1c,p2c,p1w,p2w):
+    p2c.append(p1c[0])
+    p2w.append(p2c[0])
+    p2c.remove(p2c[0])
+    p1c.remove(p1c[0])
+    
+'''Shuffle the winnings of both players'''
+def shuffle_wins(p1c,p2c,p1w,p2w):
+    shuffle(p1w)
+    shuffle(p2w)
+    p1c.extend(p1w)
+    p2c.extend(p2w)
+    del p1w[:]
+    del p2w[:]
+    print "reshuffling wins back into hand..."
+    print "----------------------------------------"
+    print "new total: " + str(len(p1c))
+    print "new total: " + str(len(p2c))
+    print "----------------------------------------"
+
+
+def outcome_round(cp1,cp2,p1c,p2c,rn):
+    print "----------------------------------------"
+    print "round number :" + str(rn)
+    print "player1 played: " + str(cp1)
+    print "player2 played: " + str(cp2)
+    print "player1 cards left: " + str(len(p1c))
+    print "player2 cards left: " + str(len(p2c))
+    print "----------------------------------------"
+    round_number = round_number + 1 
+
+round_number = 0
+def play_hand(p1c,p2c,p1w,p2w,round_number):
+    card = 0
+    while p1c and p2c:
+        cardplayed_player1 = int((p1c[card])[:2])
+        cardplayed_player2 = int((p2c[card])[:2])
+        #''' Checking which card is bigger in magnitude'''
+        if cardplayed_player1 > cardplayed_player2:
+            player1_win(player1_cards,player2_cards,player1_wins,player2_wins)
+            outcome_round(cardplayed_player1,cardplayed_player2,p1c,p2c,round_number)
+            round_number = round_number + 1
+        elif cardplayed_player2 > cardplayed_player1:
+            player2_win(player1_cards,player2_cards,player1_wins,player2_wins)
+            outcome_round(cardplayed_player1,cardplayed_player2,p1c,p2c,round_number)
+            round_number = round_number + 1
+        #'''Cards are same in magnitude'''
+        elif cardplayed_player2 == cardplayed_player1:
+            cardsvalue = ["C","D","S","H"]
+            if cardsvalue.index(str((p1c[0])[-1]))>cardsvalue.index((str(p2c[0])[-1])):
+                player1_win(player1_cards,player2_cards,player1_wins,player2_wins)
+                outcome_round(cardplayed_player1,cardplayed_player2,p1c,p2c,round_number)
+                round_number = round_number + 1
+            elif cardsvalue.index(str((p1c[0])[-1]))<cardsvalue.index((str(p2c[0])[-1])):
+                player2_win(player1_cards,player2_cards,player1_wins,player2_wins)
+                outcome_round(cardplayed_player1,cardplayed_player2,p1c,p2c,round_number)
+                round_number = round_number + 1
+            else:
+                print "error"
+                print p1c,p2c,p1w,p2w
+                print cardplayed_player1
+                print cardplayed_player2
+                print cardsvalue.index((str(p2c[0])[-1])), cardsvalue.index(str((p1c[0])[-1]))
+                print p1c[0],p2c[0]
+        else :
+            print "error"
+
+playing = True
+player2_wins = []
+player1_wins = []
+round_number = 0
+
+complete_deck = create_deck_gen()
+
+print complete_deck
+
+player1_cards = complete_deck[len(complete_deck)/2:]
+player2_cards = complete_deck[:len(complete_deck)/2]
+
+while playing is True:
+    play_hand(player1_cards,player2_cards,player1_wins,player2_wins,round_number)
+    shuffle_wins(player1_cards,player2_cards,player1_wins,player2_wins)
+    if len(player1_cards) == 0 and len(player2_cards) == 52:
+        playing =  False
+    elif len(player2_cards) == 0 and len(player1_cards) == 52:
+        playing = False
+
+if len(player2_cards) > len(player1_cards):
+    print "User 2 is the winner on round number: " + str(len(player2_cards))
+elif len(player2_cards) < len(player1_cards):
+    print "User 1 is the winner on round number: " + str(len(player1_cards))
+    
+#if __name__ == '__main__':
+    #enter sub programs here
+
+
+
+
+
+

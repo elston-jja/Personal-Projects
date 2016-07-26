@@ -1,0 +1,45 @@
+#!/usr/bin/python #depreciated statement?
+'''
+Elston Almeida
+Doubling effect for calculating rice on a board
+2016/03/07
+ICS 3U1
+'''
+#main()
+#gets value of squares from the user and error handling
+check= True
+while (check is True):
+    try:
+        insquares= int(raw_input ("Enter the number of squares on one side of the board: "))
+        if (insquares <= 0):
+            print ("\nPlease enter a larger number\n")
+        elif (insquares > 24):
+            force = raw_input ("The number you have entered is considered too big, are you sure you want to continue (y/N) : ")
+            if force in ('y','Y','yes'):
+                check = False
+            else:
+                print ("please input a smaller value")
+        else:
+            check=False
+    except (SystemError):
+            print ("A system error has occcured")
+            #clean up all the while statments and close application.
+            #sys.exit()
+    except (ValueError, NameError, TypeError):
+        print ("\nError:Common mistake is having no input, or invalid input. Please input a valid number\n")
+#sets up loop
+squares=insquares**2
+rice=1
+insquares=1 #Saving Memory and easy to read
+#while insquares is less than or equal to squares do loop
+while (insquares<=squares):
+    print 'Square %s'%insquares,'has %s'%rice,'grain of rice'
+    #doubles the rice value
+    rice=(rice)*2
+    #makes sure its not an endless loop
+    insquares= insquares +1
+#cheeky formula to end get total
+rice=rice-1
+print '\nHe recieved %s'%rice,'grains of rice in total\n'
+#end of program
+raw_input ("Press ENTER to Quit")
