@@ -1,32 +1,53 @@
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
+#include <map>
 
 using namespace std;
 
 // Vars
+int base, intermediate, intermediate_2, conv_base, arraycall;
+string init_value, finalnum[10];
 
-int base, intermediate, intermediate_2, conv_base, conv_number;
-string number;
 
 void Convert_To();
+void Print_letter(int y);
+void Help();
 
-int main() {
+int main( int argc, char *argv[]) {
 
-  cout << "Please enter the current base\n> ";
-  cin >> base;						  // Initial base
+  // Not enough arguments
+  if (argc < 4) {
+    Help();
+    exit(0);
+  }
 
-  cout << "Please enter the value\n> ";
-  cin >> number;					  // Initial value 
+  // Checks if the ints are valid
+  else if (atoi(argv[1]) / 1 == 0 || atoi(argv[3])/ 1 == 0) {
+      Help();
+      exit(0);
+  }
   
-  cout << "Please enter the value to convert to\n> ";
-  cin >> conv_base;					  // Final base
-  
+  // Checks if the string is valid
+  else if (stoi(argv[2]) == 0) {
+    Help();
+    exit(0);
+  }
+
+  base = atoi(argv[1]);					  // initial base
+  init_value = to_string(atoi(argv[2]));		  // initial value
+  conv_base = atoi(argv[3]);				  // base to convert to
+    
+
   Convert_To();						  // Calls function to convert number
 
-  conv_number = intermediate;				  // Set the final number to the converted intermediate value
-  
-  cout << conv_number <<endl;				  // Print out the final converted number
+  while ( arraycall != 0 ) {
+
+    cout << finalnum[arraycall - 1];			  // Prints out the strings in reverse order
+
+    arraycall--;
+  }
+  cout << endl;						  // Cleanly flush the output
 
   return 0;
 
@@ -37,7 +58,7 @@ void Convert_To() {
   // Skips if base is the same as converted base
   if (base != conv_base) {
 
-    intermediate = stoi( number, nullptr, base );	  // Convert nummber to decimal
+    intermediate = stoi( init_value, nullptr, base );	  // Convert nummber to decimal
 
     // Get the number to zero and convert it each time
     while ( intermediate != 0) {
@@ -45,17 +66,62 @@ void Convert_To() {
       intermediate_2 = intermediate % conv_base;          // Take the remainder from dividing base 10 by the converted base 
       intermediate = intermediate / conv_base;		  // Take the product from dividing the base 10 by the converted base
 
-      cout << intermediate_2 << endl;
-    }
-    
+      if ( intermediate_2 < 10 ) { 
+	finalnum[arraycall] = to_string(intermediate_2);  // Adds the values to an array of strings
+      }
+      else {
+	Print_letter(intermediate_2);			  // Go to function to change the numbers over 10 to words
+      }
+      arraycall++;					  // Keeps track of all the ints entered into the list
+	}
   }
 
   else {
 
-    intermediate = stoi(number);
+    intermediate = stoi(init_value);			  // return the same number input if no conversion takes place
   }
+}
 
+void Print_letter(int y){
 
+  map<int, string> Comparator;				  // Creates a map for matching the corresponding str for the int
 
+  Comparator[10] = "A";
+  Comparator[11] = "B";
+  Comparator[12] = "C";
+  Comparator[13] = "D";
+  Comparator[14] = "E";
+  Comparator[15] = "F";
+  Comparator[16] = "G";
+  Comparator[17] = "H";
+  Comparator[18] = "I";
+  Comparator[19] = "J";
+  Comparator[20] = "K";
+  Comparator[21] = "L";
+  Comparator[22] = "M";
+  Comparator[23] = "N";
+  Comparator[24] = "O";
+  Comparator[25] = "P";
+  Comparator[26] = "Q";
+  Comparator[27] = "R";
+  Comparator[28] = "S";
+  Comparator[29] = "T";
+  Comparator[30] = "U";
+  Comparator[31] = "V";
+  Comparator[32] = "X";
+  Comparator[33] = "Y";
+  Comparator[34] = "Z";
 
+  finalnum[arraycall] = Comparator[y];			  // Adds the corresponding value to the final answer
+  
+  
+}
+
+// Prints help information
+void Help()  {
+
+  cout << "Help Information" << endl;
+  cout << "COMMAND:" << endl;
+  cout << "\tconversions [initial base] [initial value] [Final base]" << endl;
+  cout << "\n\tThe output cannot be over ten characters [Did not use vectors]" << endl;
 }

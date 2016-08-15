@@ -10,7 +10,7 @@ void help();
 int main( int argc, char *argv[] ) {
 
   // Checks if arguments exits
-  if (argc < 2) {
+  if (argc < 3) {
     help();
     exit(0);
   }
