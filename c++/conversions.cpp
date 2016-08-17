@@ -29,13 +29,14 @@ int main( int argc, char *argv[]) {
   }
   
   // Checks if the string is valid
-  else if (stoi(argv[2]) == 0) {
+  else if ( stoi( string(argv[2]), nullptr, atoi(argv[1]) ) == 0) {
+    cout << "The answer is 0\n";
     Help();
     exit(0);
   }
 
   base = atoi(argv[1]);					  // initial base
-  init_value = to_string(atoi(argv[2]));		  // initial value
+  init_value = string(argv[2]);           		  // initial value
   conv_base = atoi(argv[3]);				  // base to convert to
     
 
