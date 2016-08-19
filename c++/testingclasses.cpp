@@ -2,32 +2,35 @@
 
 class Divide
 {
+private:
+  double numerator;
+  double denominator;
+  
 public:
-  int numerator;
-  int denominator = 0;
-
-  Divide()
-  {
-    std::cout << "Please enter the value for first number: ";
-    std::cin  >> numerator;
-    while ( denominator == 0) {
-      std::cout << "Please enter the value for the second number: ";
-      std::cin >> denominator;
-    }  
-  }
-  double getAnswer() { return static_cast<double>(numerator) / denominator; }
-  double getPercent() { return static_cast<double>(getAnswer()) * (100); }
+  void getFactoial();  
+  //Divide (double x, double y): numerator(x), denominator(y) {}
+  double getPercent() {return double((numerator)/(denominator))*100 ;}
+  double getAnswer();
 };
 
-int main() {
-  
-  Divide frac;
+void Divide::getFactoial () {
+  std::cout << "Please enter the numerator: ";
+  std::cin >> numerator;
 
-  std::cout << "DECIMAL\n";
-  std::cout << frac.getAnswer() << std::endl;
-  std::cout << "Percent\n";
-  std::cout << frac.getPercent() << "%" << std::endl;
-  
-  
+  denominator = 0;
+
+  while(denominator == 0) {
+    std::cout << "Please enter the denominator: ";
+    std::cin >> denominator;
+  }
+}
+double Divide::getAnswer() {return double(numerator)/(denominator) ;}
+
+int main() {
+  Divide foo;
+  foo.getFactoial();  
+  std::cout << "The percent is " << foo.getPercent() << "% " << std::endl;
+  std::cout << "The decimal is " << foo.getAnswer() << std::endl;
+
   return 0;
 }
