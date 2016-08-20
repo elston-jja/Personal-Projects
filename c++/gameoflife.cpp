@@ -34,11 +34,33 @@ void PopulateSquares::GetDimentions() {
   width = std::stoi(dimentions[0]);			    // From the array
 }
 
+class Gameboard {
+private:
+  int rows;
+  int columbs;
+  char gameboard;
+public:
+  Gameboard (int width, int length) : rows(width) , columbs(length) {char gameboard[columbs][rows];}
+  char GetGameboard() {return gameboard ;}
+
+};
+
+template<int numberOfRows, int numberOfColumns>
+void PrintGameboard(int (&theArray)[numberOfRows][numberOfColumns])
+{
+  for(int x = 0; x < numberOfRows; x++){
+    for(int y = 0; y < numberOfColumns; y++){
+      std::cout << theArray[x][y] << " ";
+    }
+    std::cout << std::endl;
+  }
+}
 
 int main() {
 
   int length;
   int width;
+  char gameboard;
   
   PopulateSquares squares;
   squares.GetDimentions();
@@ -48,20 +70,9 @@ int main() {
 
   std::cout <<  "Columbs: " << width << " Rows: " << length << std::endl; // Debugging
 
-  char gameboard[width][length];                            // Create the empty multi-dimentional array
-
-  //std::fill(gameboard[0], gameboard[0] + squares.GetArea(), 'D');
-  //memset(gameboard, 'D', sizeof(gameboard));
-  
-  
-  for (int r = 0; r < length; r++) {			    
-    for (int c = 0; c < width; c++ ) {
-      gameboard[r][c] = {'D'};
-      std::cout << gameboard[r][c] << " ";
-    }
-    std::cout << std::endl;
-  }
+  Gameboard Tiles(length, width);
+  gameboard = Tiles.GetGameboard();
+  PrintGameboard(gameboard);
 
   return 0;
 }
-
