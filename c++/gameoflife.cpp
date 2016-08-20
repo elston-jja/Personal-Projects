@@ -22,7 +22,7 @@ public:
 
 void PopulateSquares::GetDimentions() {
 
-  std::cout << "Enter the dimentions [wxh]: ";
+  std::cout << "Enter the dimentions [LxW]: ";
   std::cin >> input;
 
   std::stringstream inp(input);				    // Sets up a string buffer
@@ -46,14 +46,17 @@ int main() {
   length = squares.GetLength();				    // Set the values for the length and width of the array
   width = squares.GetWidth();
 
-  std::cout <<  " Columbs: " << width << " Rows: " << length << std::endl; // Debugging
+  std::cout <<  "Columbs: " << width << " Rows: " << length << std::endl; // Debugging
 
-  int gameboard[width][length];				    // Create the empty multi-dimentional array
+  char gameboard[width][length];                            // Create the empty multi-dimentional array
 
-  memset(gameboard, 0, sizeof(gameboard));		    // Fill the Array values with 0
-
-  for (int r = 0; r < length; r++) {			    // Print the Array Debugging
+  //std::fill(gameboard[0], gameboard[0] + squares.GetArea(), 'D');
+  //memset(gameboard, 'D', sizeof(gameboard));
+  
+  
+  for (int r = 0; r < length; r++) {			    
     for (int c = 0; c < width; c++ ) {
+      gameboard[r][c] = {'D'};
       std::cout << gameboard[r][c] << " ";
     }
     std::cout << std::endl;
