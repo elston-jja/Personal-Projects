@@ -5,13 +5,14 @@
 #include <cstring>
 
 void PrintGameboard(char **gameboard, int height, int width, bool print);
+int CheckNeighbours(char **gameboard, int x, int y, int width, int height);
 
 int main() {
 
   //Vars
   std::string splitstring, input_d, input_a, dimentions_s;
-  int height, width, cellsalive, x, y;
-  char **gameboard;
+  int height, width, cellsalive, x, y, neighbours;
+  char **gameboard; bool running;
   std::vector<std::string>inputarray, alivecellsinput;
 
   std::cout << "Enter The Dimentions [WxH]: ";
@@ -54,8 +55,18 @@ int main() {
   PrintGameboard(gameboard, height, width, true);	    // Only print the gameboard
   std::cout << "\n||Press enter to begin||";
   std::cin.ignore();
-
   
+  running = true;
+  while (running) {}
+  
+    for ( y = 0; y > height; y++) {
+      for ( x = 0; x > width ; x++) {
+    	if (gameboard[x][y] == 'A') {
+	  neighbours = CheckNeighbours(gameboard, x, y, width, height);// Returns cells are alive arround the current cell
+	  std::cout << neighbours << std::endl;
+    	}
+      }
+    }
   
   for (int i = 0; i < width; i++) {			    // delete each pointer from pointer list before exit
     delete[] gameboard[i];
@@ -75,3 +86,70 @@ void PrintGameboard(char **gameboard, int height, int width,bool print ) {
     std::cout << std::endl;
   } 
 }
+
+int CheckNeighbours(char **gameboard, int x, int y, int width, int height) {
+
+  int NeighboursFound = 0;
+  if (x == 0 and y !=0 and y != height) {
+    if (gameboard[x+1][y+1] == 'A') { NeighboursFound++; }
+    if (gameboard[x+1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x][y-1] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y+1] == 'A')   { NeighboursFound++; }
+    if (gameboard[x+1][y] == 'A')   { NeighboursFound++; }
+  }
+  else if (y == 0 and x != 0 and x != width) {
+    if (gameboard[x+1][y+1] == 'A') { NeighboursFound++; }
+    if (gameboard[x-1][y+1] == 'A') { NeighboursFound++; }
+    if (gameboard[x-1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x+1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y+1] == 'A')   { NeighboursFound++; }
+  }
+  else if (x == 0 and y == 0) {
+    if (gameboard[x+1][y+1] == 'A') { NeighboursFound++; }
+    if (gameboard[x+1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y+1] == 'A')   { NeighboursFound++; }
+  }
+  else if (x == width and y == height){
+    if (gameboard[x-1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x-1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y-1] == 'A')   { NeighboursFound++; }
+  }
+  else if (x == width and y != height and y != 0){
+    if (gameboard[x-1][y+1] == 'A') { NeighboursFound++; }
+    if (gameboard[x-1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x][y+1] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y-1] == 'A')   { NeighboursFound++; }
+    if (gameboard[x-1][y] == 'A')   { NeighboursFound++; }
+  }
+  else if (x == 0 and y == height) {
+    if (gameboard[x+1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x+1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y-1] == 'A')   { NeighboursFound++; }
+  }
+  else if (y == height and x != width and x != 0) {
+    if (gameboard[x+1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x-1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x-1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x+1][y] == 'A')   { NeighboursFound++; }
+    if (gameboard[x][y-1] == 'A')   { NeighboursFound++; }
+  }
+  else if (y == 0 and x == width) {
+    if (gameboard[x-1][y-1] == 'A') { NeighboursFound++; }
+    if (gameboard[x][y-1] == 'A')   { NeighboursFound++; }
+    if (gameboard[x-1][y] == 'A')   { NeighboursFound++; }
+  }
+  return NeighboursFound;
+  
+}
+
+
+/*
+  RULES
+
+  --For each cell that is 'populated'
+  Each cell with one or no neighbors dies, as if by solitude. 
+  Each cell with four or more neighbors dies, as if by overpopulation. 
+  Each cell with two or three neighbors survives. 
+  --For a space that is 'empty' or 'unpopulated'
+  Each cell with three neighbors becomes populated. 
+*/
