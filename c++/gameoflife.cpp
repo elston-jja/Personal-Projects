@@ -2,77 +2,76 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <stdio.h>
-#include <string.h>
+#include <cstring>
 
-class PopulateSquares {
-private:
-  std::string input;
-  std::string item;
-  int length;
-  int width;
-   
-public: 
-  std::vector<std::string>dimentions;		             // Vector to allocate dimentions. Only 0 and 1. used for length 
-  void GetDimentions();					     // and width
-  int GetArea() { return int (length)*(width) ;}
-  int GetLength() { return int (length); }
-  int GetWidth() { return int (width); }
-};
-
-void PopulateSquares::GetDimentions() {
-
-  std::cout << "Enter the dimentions [LxW]: ";
-  std::cin >> input;
-
-  std::stringstream inp(input);				    // Sets up a string buffer
-
-  while( std::getline(inp, item, 'x') ){		    // Break the input using the delimiter char 'x' 
-    dimentions.push_back(item);				    // Saves the broken string as strings in a vector array
-  }
-  length = std::stoi(dimentions[1]);			    // Sets the length and the width by calling the first and second
-  width = std::stoi(dimentions[0]);			    // From the array
-}
-
-class Gameboard {
-private:
-  int rows;
-  int columbs;
-  char gameboard;
-public:
-  Gameboard (int width, int length) : rows(width) , columbs(length) {char gameboard[columbs][rows];}
-  char GetGameboard() {return gameboard ;}
-
-};
-
-template<int numberOfRows, int numberOfColumns>
-void PrintGameboard(int (&theArray)[numberOfRows][numberOfColumns])
-{
-  for(int x = 0; x < numberOfRows; x++){
-    for(int y = 0; y < numberOfColumns; y++){
-      std::cout << theArray[x][y] << " ";
-    }
-    std::cout << std::endl;
-  }
-}
+void PrintGameboard(char **gameboard, int height, int width, bool print);
 
 int main() {
 
-  int length;
-  int width;
-  char gameboard;
+  //Vars
+  std::string splitstring, input_d, input_a, dimentions_s;
+  int height, width, cellsalive, x, y;
+  char **gameboard;
+  std::vector<std::string>inputarray, alivecellsinput;
+
+  std::cout << "Enter The Dimentions [WxH]: ";
+  std::getline(std::cin, input_d);			    // Get the dimentions from the user as string
+  std::stringstream stringbuf(input_d);			    // Create string buffer
   
-  PopulateSquares squares;
-  squares.GetDimentions();
+  while (std::getline(stringbuf, splitstring, 'x')) {	    // Break input using a delimiter 
+    inputarray.push_back(splitstring);			    // and push it into a string vector
+  }
+  height = std::stoi(inputarray[1]);			    // Assign height and width from the vector values
+  width = std::stoi(inputarray[0]);
+    
+  gameboard = new char *[width];			    // Gamelist will point to width.
+  for (int i = 0; i < width; i++) {                         // For each width value in the gameboard array point
+    gameboard[i] = new char[height]; 			    // to the array of heights
+  }							    
 
-  length = squares.GetLength();				    // Set the values for the length and width of the array
-  width = squares.GetWidth();
+  std::cout << "How many cells are alive :";		    // Get the amount of cells alive
+  std::cin >> cellsalive;
+  std::cin.ignore();					    // Remove the \n so program can run using getline
 
-  std::cout <<  "Columbs: " << width << " Rows: " << length << std::endl; // Debugging
+  PrintGameboard(gameboard, height, width, false);	    // Set all the game tiles to dead or '~' and print
 
-  Gameboard Tiles(length, width);
-  gameboard = Tiles.GetGameboard();
-  PrintGameboard(gameboard);
+  for (int i = 0; i< cellsalive; i++) {
+    std::cout << "Enter the " << i+1 << " coordinate [x,y]: "; // Asks for each cordinate    
+    std::getline(std::cin, input_a);			    // Get the coordinate from the user
+    std::stringstream stringbuf(input_a);		    // Copy the coordinate into the buffer
 
+    while(std::getline(stringbuf, splitstring, ',')) {	    // Breaks string input using delimiter
+      alivecellsinput.push_back(splitstring);		    // and pushes it into string vector
+    }
+    x = std::stoi(alivecellsinput[i*2]);		    // Assign the X and the Y values from the string vectors
+    y = std::stoi(alivecellsinput[(i*2)+1]);
+    
+    if ( x -1 <= width  and  y -1 <= height ) {		    // Check if they are within range
+	gameboard[x -1][y -1] = 'A';			    // change the value of the selected cells to 'A'
+      }
+  }
+  std::cout << "The final playing board looks: \n\n";
+  PrintGameboard(gameboard, height, width, true);	    // Only print the gameboard
+  std::cout << "\n||Press enter to begin||";
+  std::cin.ignore();
+
+  
+  
+  for (int i = 0; i < width; i++) {			    // delete each pointer from pointer list before exit
+    delete[] gameboard[i];
+  }
+  
   return 0;
+}
+
+void PrintGameboard(char **gameboard, int height, int width,bool print ) {
+  for (int y = 0; y < height; y++) {
+    for (int x = 0; x < width; x++) {
+      if (!print) {
+      gameboard[x][y] = '-';
+      }
+      std::cout << gameboard[x][y] << " ";
+    }
+    std::cout << std::endl;
+  } 
 }
