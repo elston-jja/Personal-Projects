@@ -9,12 +9,12 @@ int main() {
   int randint, namelistsize;
   std::string names;
   std::vector<std::string> namelist;
-  
+
   while (1) {
     std::cout << "Please enter the names in the lottery: ";
     std::getline(std::cin, names);			    // Store the string entered into string var names
     if (names != "done") {
-      namelist.push_back(names);			    // Add the names entered into the vector 
+      namelist.push_back(names);			    // Add the names entered into the vector
     }
     else {
       break;
@@ -27,7 +27,7 @@ int main() {
     std::cout << "Sorry " << namelist[randint] << std::endl; // Provide an elimination statement
     namelist.erase(namelist.begin()+randint);		    // Delete the name stated from the vector
   }
-  std::cout << "Therefore the winner is " << namelist[0] << ". Congratulations!" << std::endl;
+  std::cout << "Therefore, the winner is " << namelist[0] << ". Congratulations!" << std::endl;
 
   return 0;
 }
