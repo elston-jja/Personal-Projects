@@ -4,10 +4,12 @@ char** createEmptyGameboard(int square);
 void deleteGameboard(char**gameboard, int square);
 void printGameboard(char**gameboard, int square);
 void createQueen(char**gameboard, int squares, int x, int y);
+bool checkMove(char**gameboard, int x, int y);
 
 int main() {
 
-  int input;// x1(0), y1(0);//, backup_x1(x1), backup_y1(y1), x2, y2;
+  int input, x(0), y(0),a ;
+  bool valid;
 
   std::cout << "Amount of queens: ";
   std::cin >> input;
@@ -15,25 +17,20 @@ int main() {
   char** gameboard = createEmptyGameboard(input);
   printGameboard(gameboard, input);
 
-
-  // for (int i = 0; i < input; i++) {
-  //   createQueen(gameboard, input, x1, y1);
-
-  //   for (int y2 = 1; y2 < input; y2++){
-
-  //     for (int A1 = 1; A1 < input; A1++){
-
-  // 	if (gameboard[x1+A1][y2] != 'X'){
-  // 	    x2 = x1 + A1;
-  // 	    createQueen(gameboard, input, x2, y2);
-  // 	    break;
-  // 	  }
-  //     }
-  //   }
-  // }
-
-  createQueen(gameboard, input, 0, 8);
-
+  createQueen(gameboard, input, a, y);
+  
+  for ( int i = 0; i < input; i++){
+    createQueen(gameboard, input, i, y);
+    for (int a = 1; a < input; a++){
+      for (int b = 0; b < input; b++){
+	valid = checkMove(gameboard, b, a);
+	if (valid) {
+	  createQueen(gameboard,input ,b ,a );
+	}
+      }
+      break;
+    }
+  }
   printGameboard(gameboard, input);
 
   deleteGameboard(gameboard, input);
@@ -75,113 +72,27 @@ void printGameboard(char**gameboard, int square) {
 }
 
 void createQueen(char**gameboard, int squares, int x, int y) {
-  int a(x),b(y);
+  int a(x);
   gameboard[x][y] = 'Q';
-  if (x != squares-1 and y != squares-1 and y != 0 and x != 0) {
+  for (int i = y-1; i >= 0; i--){gameboard[x][i] = 'X';}	// Up
+  for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}   // Down
+  for (int i = x+1; i < squares; i++){gameboard[i][y] = 'X';}   // Right
+  for (int i = x-1; i >= 0; i--){gameboard[i][y] = 'X';}        // Left
+  for (int i = y+1; i < squares; i++){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}    // Down Left
+  a = x;
+  for (int i = y+1; i < squares; i++){ if (a+1 == squares) {break;};a++;gameboard[a][i] = 'X'; } //Down Right
+  a = x;
+  for (int i = y-1; i >= 0; i--){ if (a+1 > squares-1) {break;};a++;gameboard[a][i] = 'X'; }  //Up Right
+  a = x;
+  for (int i = y-1; i >= 0; i--){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}         // Up Left
+  a = x;
+}
 
-    //up
-    for (int i = y-1; i >= 0; i--){gameboard[x][i] = 'X';}
-    //down
-    for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}
-    // right
-    for (int i = x+1; i < squares; i++){gameboard[i][y] = 'X';}
-    // left
-    for (int i = x-1; i >= 0; i--){gameboard[i][y] = 'X';}
-    //diagonal down left
-    for (int i = y+1; i < squares; i++){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-    a = x;
-    //diagonal down right
-    for (int i = y+1; i < squares; i++){ if (a > squares) {break;};a++;gameboard[a][i] = 'X'; }
-    a = x;
-    //diagonal up right
-    for (int i = y-1; i > 0; i--){ if (a+1 == squares or y == 0) {break;};a++;gameboard[a][i] = 'X'; }
-    a = x;
-    //diagonal up left
-    for (int i = y-1; i >= 0; i--){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-    a = x;
+bool checkMove(char**gameboard,int x, int y){
+  if (gameboard[x][y] == 'X') {
+    return false;
   }
-
-  if (x == 0) {
-    // right
-    for (int i = x+1; i < squares; i++){gameboard[i][y] = 'X';}
-    if (y == 0) {
-      //diagonal down right
-      for (int i = y+1; i < squares; i++){ if (a > squares) {break;};a++;gameboard[a][i] = 'X'; }
-      a = x;
-      //down
-      for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}
-    }
-    else if (y != 0 and y != squares-1){
-      //diagonal down right
-      for (int i = y+1; i < squares; i++){ if (a > squares) {break;};a++;gameboard[a][i] = 'X'; }
-      a = x;
-      //diagonal up right
-      for (int i = y-1; i > 0; i--){ if (a+1 == squares or y == 0) {break;};a++;gameboard[a][i] = 'X'; }
-      a = x;
-      //down
-      for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}
-      //up
-      for (int i = y-1; i >= 0; i--){gameboard[x][i] = 'X';}
-    }
-    else if (y == squares-1){
-      //up
-      for (int i = y-1; i >= 0; i--){gameboard[x][i] = 'X';}
-      //diagonal up right
-      for (int i = y-1; i > 0; i--){ if (a+1 == squares or y == 0) {break;};a++;gameboard[a][i] = 'X'; }
-      a = x;
-    }
-  }
-
-  if (x == squares-1) {
-
-    if ( y != squares-1 and y != 0){
-      //diagonal down left
-      for (int i = y+1; i < squares; i++){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-      a = x;
-      //down
-      for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}
-    }
-    else if ( y == 0 ) {
-      //down
-      for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}
-      // left
-      for (int i = x-1; i >= 0; i--){gameboard[i][y] = 'X';}
-      //diagonal down left
-      for (int i = y+1; i < squares; i++){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-      a = x;
-    }
-
-    //up
-    for (int A_1 = y-1; A_1 >= 0; A_1--){gameboard[x][A_1] = 'X';}
-    //left
-    for (int A_2 = x-1; A_2 >= 0; A_2--){gameboard[A_2][y] = 'X';}
-    //diagonal up left
-    for (int i = y-1; i >= 0; i--){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-    a = x;
-
-  }
-  if ( y == squares -1) {
-    //up
-    for (int A_1 = y-1; A_1 >= 0; A_1--){gameboard[x][A_1] = 'X';}
-    //left
-    for (int A_2 = x-1; A_2 >= 0; A_2--){gameboard[A_2][y] = 'X';}
-    // right
-    for (int i = x+1; i < squares; i++){gameboard[i][y] = 'X';}
-    //diagonal up right
-    for (int i = y-1; i > 0; i--){ if (a+1 == squares or y == 0) {break;};a++;gameboard[a][i] = 'X'; }
-    a = x;
-    //diagonal up left
-    for (int i = y-1; i >= 0; i--){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-    a = x;
-  }
-  if ( y == 0 and x != squares -1 and x != 0) {
-    //down
-    for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}
-    //diagonal down left
-    for (int i = y+1; i < squares; i++){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}
-    a = x;
-    //diagonal up right
-    for (int i = y-1; i > 0; i--){ if (a+1 == squares or y == 0) {break;};a++;gameboard[a][i] = 'X'; }
-    a = x;
+  else {
+    return true;
   }
 }
