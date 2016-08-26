@@ -110,17 +110,16 @@ void getSolution(char**gameboard, int input, int x, int y){
 
   for (int i = 0; i < input; i++) {			    
     gameboard[i][0] = 'Q';
-    
 
-    b
+    runSolutions(gameboard, input, 0, 0)
   }  
 }
 
-void runSolutions(char**gameboard, int input, int xy){
+void runSolutions(char**gameboard, int input, int x, int y){
 
   bool valid, columnQueen;
   
-  for (int x = 0; x < input; x++) {
+  for (int x = ; x < input; x++) {
     for (int y = 0; y < input; y++){
       
       valid = checkMove(gameboard, input, x, y);
