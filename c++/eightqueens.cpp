@@ -1,42 +1,25 @@
 #include <iostream>
+#include <stdlib.h>
 
 char** createEmptyGameboard(int square);
 void deleteGameboard(char**gameboard, int square);
 void printGameboard(char**gameboard, int square);
-void createQueen(char**gameboard, int squares, int x, int y);
-bool checkMove(char**gameboard, int x, int y);
+bool checkMove(char**gameboard,int squares,int x, int y);
 void checkQueens(char**gameboard, int squares);
+bool checkColumnQueen(char**gameboard, int squares, int y);
+void getSolution(char**gameboard, int input,int x, int y);
+void runSolution(char**gameboard, int input,int x, int y);
 
 int main() {
 
-  int input, y(0);
+  int input;
 
   std::cout << "Amount of queens: ";
-  std::cin >> input;
+  std::cin >> input;					    // Get the amount of queens
 
-  char** gameboard = createEmptyGameboard(input);
-  //printGameboard(gameboard, input);
-  
-  for (int i = 0; i < input; i++){			    // Go through the first line
-    createQueen(gameboard, input, i, y);		    // Create a queen on the first square
-    for (int b = 1; b < input; b++){			    // itterate through the y (y=1,y=2,y=3...)
-      for (int a = 1; a < input; a++){			    // itterate through the x (x'')
-	if (gameboard[a][b] == '-'){                        // Check if it is and empty square
-	  createQueen(gameboard, input, a, b);		    // Create queen on empty square
-	}
-	else if ( a > input ) {				    // if the whole row is full check the next row
-	  a = 0;					    // got to the next line and set the x value to zero
-	  b++;
-	  createQueen(gameboard, input, a, b);
-	}
-	else if ( b > input ) {				    // check if the y value is at the end
-	  break;					    // end the loop if it is
-	}
-      }
-    }
-    break;
-  }
+  char** gameboard = createEmptyGameboard(input);	    // Create the board for playing based on input
 
+  getSolution(gameboard, input, 0 , 0);
   
   printGameboard(gameboard, input);
 
@@ -80,37 +63,27 @@ void printGameboard(char**gameboard, int square) {
   std::cout << std::endl;
 }
 
-void createQueen(char**gameboard, int squares, int x, int y) {
-  int a(x);
-  gameboard[x][y] = 'Q';
-  for (int i = y-1; i >= 0; i--){gameboard[x][i] = 'X';}	// Up
-  for (int i = y+1; i < squares; i++){gameboard[x][i] = 'X';}   // Down
-  for (int i = x+1; i < squares; i++){gameboard[i][y] = 'X';}   // Right
-  for (int i = x-1; i >= 0; i--){gameboard[i][y] = 'X';}        // Left
-  for (int i = y+1; i < squares; i++){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}    // Down Left
-  a = x;
-  for (int i = y+1; i < squares; i++){ if (a+1 == squares) {break;};a++;gameboard[a][i] = 'X'; } //Down Right
-  a = x;
-  for (int i = y-1; i >= 0; i--){ if (a+1 > squares-1) {break;};a++;gameboard[a][i] = 'X'; }  //Up Right
-  a = x;
-  for (int i = y-1; i >= 0; i--){ if (a-1 < 0 ){break;} ;a--; gameboard[a][i] = 'X';}         // Up Left
-  a = x;
-}
+ bool checkMove(char**gameboard, int squares,int x, int y){
+   
+   for (int b = 0; b < squares; b++){
+     for (int a = 0; a < squares; a++){
 
-bool checkMove(char**gameboard,int x, int y){
-  if (gameboard[x][y] == 'X') {
-    return false;
-  }
-  else {
-    return true;
-  }
-}
+       if (gameboard[a][b] == 'Q'){
+	 
+	 if(abs(a)-abs(x) == 0)    {return false;}
+	 if(abs(b)-abs(y) == 0)    {return false;}
+	 if(abs((b-y)/(a-x)) == 1) {return false;}
+       }
+     } 
+   }
+   return true;						    // Returns true if 
+ }
 
 void checkQueens(char**gameboard, int squares) {	    // Quick way to read output and checks
   int queensfound(0);
   for (int y = 0; y < squares; y++){
     for (int x = 0; x < squares; x++){
-      if (gameboard[x][y] != 'X'){
+      if (gameboard[x][y] == 'Q'){
 	queensfound++;
 	std::cout << "X: " << x << " Y: " << y << std::endl;
       }
@@ -123,4 +96,52 @@ void checkQueens(char**gameboard, int squares) {	    // Quick way to read output
   else{
     std::cout << "Program Wroks" << std::endl;
   }
+}
+
+bool checkColumnQueen(char**gameboard, int squares, int x){
+
+  for (int i = 0; i < squares; i++ ){
+    if (gameboard[x][i] == 'Q'){return true;}
+  }
+  return false;
+}
+
+void getSolution(char**gameboard, int input, int x, int y){
+
+  for (int i = 0; i < input; i++) {			    
+    gameboard[i][0] = 'Q';
+    
+
+    b
+  }  
+}
+
+void runSolutions(char**gameboard, int input, int xy){
+
+  bool valid, columnQueen;
+  
+  for (int x = 0; x < input; x++) {
+    for (int y = 0; y < input; y++){
+      
+      valid = checkMove(gameboard, input, x, y);
+      
+      if (valid) {
+	
+	gameboard[x][y] = 'Q';
+	
+	}
+      if (y == input-1){
+	
+	columnQueen = checkColumnQueen(gameboard, input, x);
+	
+	if (!columnQueen) {
+	  
+	    std::cout << "Queen does not exist" << std::endl;
+	    
+	    
+	}
+      }
+    }
+  }
+  break;
 }
