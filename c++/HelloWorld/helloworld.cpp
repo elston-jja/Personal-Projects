@@ -1,9 +1,17 @@
 #include <iostream>
 
-int main() {
+int many() {
+  std::cout << "Do someting";
 
-  std::cout << "hello world" << endl ;
-
-    return 0;
-
+  return 0;
 }
+
+
+int main() {
+  std::cout << "testing" << std::endl;
+  std::cout << "Hello world" << std::endl;
+
+  return 0;
+}
+
+

@@ -25,7 +25,6 @@
 
 */
 
-
 void PrintGameboard(char **gameboard, int height, int width, bool print);
 int CheckNeighbours(char **gameboard, int x, int y, int width, int height);
 
@@ -46,12 +45,12 @@ int main() {
   }
   height = std::stoi(inputarray[1]) +1;			    // Assign height and width from the vector values
   width = std::stoi(inputarray[0])  +1;
-
+  
   gameboard = new char *[width];			    // Gamelist will point to width.
   for (int i = 0; i < width; i++) {                         // For each width value in the gameboard array point
     gameboard[i] = new char[height]; 			    // to the array of heights
   }							    
-
+  
   std::cout << "How many turns to play: ";		    // Turns to end the main game loop
   std::cin >> endturn;  
   std::cout << "How many cells are alive: ";		    // Get the amount of cells alive
@@ -72,8 +71,8 @@ int main() {
     y = std::stoi(alivecellsinput[(i*2)+1]);
     
     if ( x <= width  and  y <= height ) {		    // Check if they are within range
-	gameboard[x][y] = 'A';			    // change the value of the selected cells to 'A'
-      }
+      gameboard[x][y] = 'A';			    // change the value of the selected cells to 'A'
+    }
   }
   std::cout << "The final playing board looks: \n\n";
   PrintGameboard(gameboard, height, width, true);	    // Only print the gameboard
@@ -109,6 +108,7 @@ int main() {
   return 0;
 }
 
+// Print out the name of the Gameboard
 void PrintGameboard(char **gameboard, int height, int width,bool print ) {
   std::cout << std::endl;
   for (int y = 0; y < height; y++) {
