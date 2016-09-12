@@ -1,5 +1,6 @@
 #include <iostream>
 
+// Forward Declaration
 void createEmptyGameboard();
 void deleteGameboard();
 void printGameboard();
@@ -8,13 +9,14 @@ void solve();
 bool checkMove(int x, int y);
 bool processTurns(int queens);
 
+// GLOBAL VARS
 char**gameboard;
 
 int N;
 
 int main() {
   
-  N = 8;
+  N = 4;
   
   createEmptyGameboard();	                            // Create the board for playing based on queens
 
@@ -38,7 +40,6 @@ void solve()
     }
 }
 
-
 bool processTurns(int queens){
 
   if (queens == N){					    // Solved as there are as many queens as rows
@@ -47,19 +48,18 @@ bool processTurns(int queens){
 
   for (int column = 0; column < N; column++) {		    // Run throught the columns
       
-      if ( checkMove(queens, column) ) {		    // Check is the current spot valid
-	gameboard[queens][column] = 'Q';		    // Place a queen where the spot is valid
+    if ( checkMove(queens, column) ) {			    // Check if the current spot is valid
+      gameboard[queens][column] = 'Q';		    // Place a queen where the spot is valid
 	  
-	  if ( processTurns(queens+1) ) {		    // Check if the next column can place a queen
-	    return true;				    // And return true if possible
-	  }
-	  
-	  gameboard[queens][column] = '-';		    // if the solution fails remove the piece and go down the row
+      if ( processTurns(queens+1) ) {		    // Check if the next column can place a queen
+	return true;				    // And return true if possible
       }
+	  
+      gameboard[queens][column] = '-';		    // if the solution fails remove the piece and go down the row
+    }
   }
   return false;
 }
-
 
 // The subprograms below works.
 
@@ -86,7 +86,7 @@ void printGameboard() {
     std::cout << std::endl; }
 }
 
- bool checkMove(int x, int y){
+bool checkMove(int x, int y){
    
    for (int b = 0; b < N; b++){ for (int a = 0; a < N; a++){ if (gameboard[a][b] == 'Q')
 	 {
