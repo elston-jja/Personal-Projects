@@ -179,7 +179,7 @@ def main():
     background = pygame.image.load(background_path).convert_alpha()
 
     done = False
-
+    
     while not done:
 
         for event in pygame.event.get():
