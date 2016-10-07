@@ -4,7 +4,6 @@
 void createEmptyGameboard();
 void deleteGameboard();
 void printGameboard();
-void solve();
 
 bool checkMove(int x, int y);
 bool processTurns(int queens);
@@ -16,28 +15,22 @@ int N;
 
 int main() {
   
-  N = 4;
+  N = 8;
   
   createEmptyGameboard();	                            // Create the board for playing based on queens
 
-  solve();						    // Check if solution exists
-
-  deleteGameboard();					    // Delete the gameboard pointers
-
-  return 0;
-}
-
-void solve()
-{
-    
-  if ( processTurns(0) )				    // Calls function to check if reclusive solution exists
+  if ( processTurns(0) )                                    // Calls function to check if reclusive solution exists
     {
-      printGameboard();					    // Print out the valid gameboard solved
+      printGameboard();                                     // Print out the valid gameboard solved
     }
   else
     {
       std::cout << "A solution does not exist" << std::endl;
     }
+
+  deleteGameboard();					    // Delete the gameboard pointers
+
+  return 0;
 }
 
 bool processTurns(int queens){
@@ -46,16 +39,18 @@ bool processTurns(int queens){
     return true;
   }
 
-  for (int column = 0; column < N; column++) {		    // Run throught the columns
+  for (int row = 0; row < N; row++) {		    // Run throught the columns
+
+    if (checkMove(row, queens)) {
       
-    if ( checkMove(queens, column) ) {			    // Check if the current spot is valid
-      gameboard[queens][column] = 'Q';		    // Place a queen where the spot is valid
-	  
-      if ( processTurns(queens+1) ) {		    // Check if the next column can place a queen
-	return true;				    // And return true if possible
+      gameboard[row][queens] = 'Q';
+
+      if (processTurns(queens+1)) {
+	return true;
       }
-	  
-      gameboard[queens][column] = '-';		    // if the solution fails remove the piece and go down the row
+      else {
+	gameboard[row][queens] = '~';
+      }
     }
   }
   return false;
@@ -86,7 +81,7 @@ void printGameboard() {
     std::cout << std::endl; }
 }
 
-bool checkMove(int x, int y){
+bool checkMove(int x, int y) {
    
    for (int b = 0; b < N; b++){ for (int a = 0; a < N; a++){ if (gameboard[a][b] == 'Q')
 	 {
@@ -96,6 +91,3 @@ bool checkMove(int x, int y){
    }
    return true;						    
  }
-
-
-
