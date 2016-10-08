@@ -36,8 +36,7 @@ int main(int argc, char *argv[])
   bzero((char *) &serv_addr, sizeof(serv_addr));
 
   portno = atio(argv[1]);
-  
-  
+
   
 
   

@@ -7,7 +7,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-
 void error(const char *msg) {
 
   perror(msg);

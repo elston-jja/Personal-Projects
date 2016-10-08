@@ -1,13 +1,29 @@
+# Name of file to compile
+PROGRAM = SDLtest.cpp
+
+# Compiler to use
+CC = g++
+
+# Compiler FLAGS
+FLAGS = -Wall
+
+# External libraries to include
+LIBS = -lSDL2 -lSDL2_image
+
+# Product name
+OUT = main.out
+
 install:
 
 	make build;
 	make run;
 
 build:
-	gcc SDLtest.c -lSDL -o main;
+	$(CC) $(FLAGS) $) $(LIBS) -o $(OUT) $(PROGRAM)
 
 run:
-	./main;
+	./main.out
+
 
 clean:
-	rm main;
+	rm main.out;
