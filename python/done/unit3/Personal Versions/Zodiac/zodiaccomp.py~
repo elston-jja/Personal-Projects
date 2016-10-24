@@ -1,0 +1,96 @@
+'''
+Elston Almeida
+enter info about program here
+2016/30/05
+ICS 3U1
+'''
+
+'''Get Date'''
+def birthday_day(str):
+    verified_input = False
+    while verified_input is False:
+        try:
+            birth_date_input = input("Please enter "+str+ " date of birth: ")
+            if birth_date_input < 31 or birth_date_input > 0:
+                verified_input = True
+                return(birth_date_input)
+            else:
+                print "Please enter a valid date"
+        except:
+            print "Please enter a valid date"
+
+'''Get Month'''
+def birthday_month(strn):
+    verified_input = False
+    while verified_input is False:
+        try:
+            month_birthday = raw_input ("Please enter the month " + strn + " was born : ")
+            if not month_birthday:
+                print "Please enter a month"
+            else:
+                month_birthday_int = int(month_birthday)
+                month_int = [1,2,3,4,5,6,7,8,9,10,11,12]
+                if month_birthday_int in month_int:
+                    verified_input = True
+                    return month_birthday_int
+                else:
+                    print"Please enter a valid int"
+
+        except ValueError:
+            str_birthday = (month_birthday[0]).upper()+(month_birthday[1:]).lower()
+            month_str = ["January","Febuary","March","April","May","June","July","August","September","October","November","December"]
+            month_acc = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+            #print(str_birthday)
+            if str_birthday in month_str:
+                int_birthday = month_str.index(str_birthday) + 1
+                #print int_birthday
+                verified_input = True
+                return int_birthday
+            elif str_birthday in month_str:
+                int_birthday = month_str.index(str_birthday) + 1
+                #print int_birthday
+                verified_input = True
+                return int_birthday
+            else:
+                print "Please enter a valid month"
+        except:
+            print "Please enter a valid input"
+
+'''Cross check data'''
+def zodiac_check(user_month,user_day):
+    if (user_month == 12 and user_day >= 22) or (user_month == 1 and user_day <= 19):
+        return("Capricon")
+    elif (user_month == 1 and user_day >= 20) or (user_month == 2  and user_day <= 18):
+        return("Aquarius")
+    elif (user_month == 2 and user_day >= 19) or (user_month == 3 and user_day <= 20):
+        return("Pisces")
+    elif (user_month == 3 and user_day >= 21) or (user_month == 4 and user_day <= 19):
+        return("Aries")
+    elif (user_month == 4 and user_day >= 20) or (user_month == 5 and user_day <= 20):
+        return("Taurus")
+    elif (user_month == 5 and user_day >= 21) or (user_month == 6 and user_day <= 20):
+        return("Gemini")
+    elif (user_month == 6 and user_day >= 21) or (user_month == 7 and user_day <= 22):
+        return("Cancer")
+    elif (user_month == 7 and user_day >= 23) or (user_month == 8 and user_day <= 22):
+        return("Leo")
+    elif (user_month == 8 and user_day >= 23) or (user_month == 9 and user_day <= 22):
+        return("Virgo")
+    elif (user_month == 9 and user_day >= 23) or (user_month == 10 and user_day <= 22):
+        return("Libra")
+    elif (user_month == 10 and user_day >= 23) or (user_month == 11 and user_day <= 21):
+        return("Scorpio")
+    elif (user_month == 11 and user_day >= 22) or (user_month == 12 and user_day <= 21):
+        return("Sagittarius")
+
+'''Set variables to compare'''
+user1_month = birthday_month("you were")
+user1_day = birthday_day("you")
+user2_month = birthday_month("your partner")
+user2_day = birthday_day("their")
+
+compatability_user =  zodiac_check(user1_month,user1_day)
+compatability_partner = zodiac_check(user2_month,user2_day)
+
+print compatability_user
+print compatability_partner
