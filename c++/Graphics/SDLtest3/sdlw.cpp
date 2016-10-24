@@ -17,7 +17,6 @@ SDLWrapper::SDLWrapper()
 	RENDERER = NULL;
 	WINDOW = NULL;
 	TEXTURE = NULL;
-
 }
 
 SDLWrapper::~SDLWrapper()
@@ -112,7 +111,7 @@ void SDLWrapper::freeTexture()
 bool SDLWrapper::loadImageFromFile(std::string path)
 {
 	// Get rid of previous texture
-	free();
+	freeTexture();
 	// Create the final Texture
 	SDL_Texture* newTexture = NULL;
 
@@ -161,18 +160,26 @@ int SDLWrapper::getHeight()
 	return HEIGHT;
 }
 
+SDL_Renderer* SDLWrapper::getRenderer()
+{
+	return RENDERER;
+}
+
 void SDLWrapper::refresh()
 {
 	SDL_RenderPresent(RENDERER);
 }
 
 
-SDL_Renderer* SDLWrapper::getRenderer()
-{
-	return RENDERER;
-}
-
 void SDLWrapper::renderClear()
 {
 	SDL_RenderClear(RENDERER);
 }
+
+void SDLWrapper::setColor(Uint8 R, Uint8 G, Uint8 B, Uint8 A)
+{
+	SDL_SetRenderDrawColor(RENDERER, R, G, B, A);
+	
+}
+
+//bool SDLWrapper::isRightClick(void);

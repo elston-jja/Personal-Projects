@@ -38,6 +38,9 @@ public:
 	//clear the renderer
 	void renderClear();
 
+	void setColor(Uint8,Uint8,Uint8,Uint8);
+
+
 private:
 				
 	// Actual hardware texture
@@ -51,10 +54,6 @@ private:
 	SDL_Window* WINDOW;
 	
 };
-
-
-
-
 
 
 #endif
