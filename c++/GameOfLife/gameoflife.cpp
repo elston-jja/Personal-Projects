@@ -124,6 +124,7 @@ void PrintGameboard(char **gameboard, int height, int width,bool print ) {
 }
 
 // Multitude of If statements to return the number of neighbours
+// Really inefficient!!!!
 int CheckNeighbours(char **gameboard, int x, int y, int width, int height) { 
   int NeighboursFound = 0;
   

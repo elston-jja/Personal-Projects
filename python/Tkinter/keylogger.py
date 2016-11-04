@@ -33,7 +33,7 @@ if exists == 1:
 else:
     os.system("rm /tmp/*py")
     sys.exit
-    print "File exists"
+    print ("File exists")
     for filename in filenames:
         #get tmp file name        
         if filename.endswith(".py"):
@@ -57,5 +57,5 @@ else:
         keys_pressed = []
         for k in pressed:
             keys_pressed.append(pygame.key.name(k))
-            print keys_pressed
+            print (keys_pressed)
         sys.stdout.flush()
