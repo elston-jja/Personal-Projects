@@ -1,0 +1,204 @@
+\documentclass{article}
+
+%Use Package statements
+\usepackage{chemfig, mhchem, adjustbox}
+\begin{document}
+
+
+\title{Chemistry Grade 12 \\ Chapter 1 Review}
+\author{Elston Almeida}
+\maketitle
+
+\setcounter{section}{1}
+\setcounter{subsection}{-1}
+\subsection{Intrduction to Organic Chemistry}
+
+\begin{paragraph}
+  \noindent
+  Carbon is the building block of life and has a bonding capacity of 4. Most carbon compounds are stable due to the \chemfig{C-C} and \chemfig{C-H} bonds. Functional groups are groups containing oxygen, nitrogen and halogens connected to the main hydrocarbon chain, side note, it's actually mindblowing how ever living thing contains carbon in our little part of the universe.\\
+
+  A Structural formuala  shows all the atoms and bonds, but does not show true geomtry.\\
+
+  \begin{center}
+    \chemfig{C(-[2]H)(-[4]H)(-[6]H)-C(-[2]H)(-[6]H)-C(-[2]H)(-[6]H)-C(-[0]H)(-[2]H)(-[6]H)}\\
+    \end{center}
+  \vspace{5mm}
+  
+  Ofcourse this can also be written in the condensed structural formula, however not reccomended due to the inability to visually see the bonds which is a key aspect in this course.
+
+ \begin{center}
+   \ce{H3C(CH2)2CH3}
+ \end{center}
+
+ You can also use the line diagrams which are useful for quick completion of structural diagrams on tests, each vertex is a carbon, and the lines represent the bond, generally all the carbons in the diagrams are saturated with hydrogen unless specified otherwise.
+
+ \begin{center}
+   \chemfig{-[0.5]-[7.5]-[0.5]}
+ \end{center}
+
+ \newpage
+
+ Isomers are different compounds that have molecular formulas, therefore the different isomers have different physical properties even tho the molecular formulas are identical to another.\\
+
+ \textbf{Structural isomers} are molecules that that have a different structure than others.\\
+ 
+ \textbf{Hydrocarbon isomers} are hydrocarbons that have different hydrcarbon skeletons.\\
+
+ \noindent
+ Example of an isomer: \ce{C4H10}
+ \begin{center}
+   \chemname{\chemfig{CH(-[0]CH_3)(-[4]CH_3)(-[6]CH_3)}}{isobutyl} \hspace{5pc} \chemname{\chemfig{CH_3-CH_2-CH_2-CH_3}}{butane}
+ \end{center}
+ \vspace{5mm}
+
+ \subsection{Alkanes}
+
+ Alkanes always end in ``-ane'' as to use the ending of its classification (alk''ane''s). They are only used when all the bonds of a hydrocarbon are saturated as to only have london dipersion forces. The prefies are generalized and are picked based on the amount of carbons in the longest carbon chain in the molecule. Prefix of ``-ly'' is not used from the chart.
+
+ \vspace{2mm}
+\begin{center}
+\begin{tabular}{|c|c|}
+  \hline
+  \textbf{Amount} & \textbf{Prefix}\\
+  \hline\hline
+  1  &  methyl  \\ \hline
+  2  &  ethyl   \\ \hline
+  3  &  propyl  \\ \hline
+  4  &  butyl   \\ \hline
+  5  &  pentyl  \\ \hline
+  6  &  hexyl   \\ \hline
+  7  &  heptyl  \\ \hline
+  8  &  octal   \\ \hline
+  9  &  nonyl   \\ \hline
+  10 &  decyl   \\ \hline
+ \end{tabular}
+ \end{center}
+\vspace{4mm}
+All carbons not located on the main chain are considered as functional groups and are tagged on to the front of the main hydrocarbon name with the number to show the location, relative to the main chain in alphabetical order, it does not include the suffix ``-ane''. If there are two or more of the same hydrocarbons di, tri, etc. is used to indicate the amount, along with the location to show each one in front. Lastly, Alkyl Hallides also exist and are named as chloro-, ido-, bromo-, fluoro-, etc.\\
+
+For Example:
+\\
+
+\vspace{4mm}
+\begin{center}
+  \chemname{\chemfig{CH_3-CH(-[2]CH_3)-CH(-[2]CH_3)-CH(-[2]CH_2(-[0]CH_3))-CH_2-CH_2-CH_2-CH_3}}{2,3-dimethyl-3-ethyloctane}
+  
+\end{center}
+\vspace{4mm}
+For cyclic hydrocarbons, the prefix ``cyclo-'' is added.\\
+  
+
+For example:
+\vspace{4mm}
+\begin{center}
+  \chemname{\chemfig{*6(------)}} {cyclohexane}
+  \hspace{10mm}
+  \chemname{\chemfig{*5(-----)}} {cyclopentane}
+  \hspace{10mm}
+  \chemname{\chemfig{*7(-------)}} {cycloheptane}
+\end{center}
+\vspace{4mm}
+Properties of Alkanes: Non-Soluble, Low MP and BP, Exist in all States\\
+
+\noindent
+Reactions of Alkanes: Combustion, Substitution, and Elimination\\
+
+Substitution:
+\vspace{4mm}
+
+
+\begin{center}
+  \schemestart
+  \chemname{\chemfig{C(-[4]CH_3)(-[2]CH_3)(-[6]CH_3)(-[0]CH_3)}}{2,2-dimethylpropane}
+  \+
+  \chemfig{Cl_2}
+  \arrow{->[light][][4pt]}
+  \chemname{\chemfig{C(-[4]CH_3)(-[2]CH_3)(-[6]CH_3)(-[0]CH_2Cl)}}{1-chloro-2,2-dimethylpropane}
+  \+
+  \chemfig{HCl}
+  \schemestop
+\end{center}
+
+\newpage
+
+Elimination:
+\vspace{4mm}
+
+\begin{center}
+  \schemestart
+  \chemname{\chemfig{H_3C-CH(-[6]Br)-CH_3}}{2-bromopropane}
+  \+
+  \ce{OH-}
+  \arrow{->[][][4pt]}[0]
+  \chemname{\chemfig{H_2C=CH-CH_3}}{propene}
+  \+
+  \chemname{\chemfig{O(-[4]H)(-[6]H)}}{water}
+  \+
+  \ce{Br-}
+  \schemestop
+\end{center}
+
+\subsection{Alkenes and Alkynes}
+
+If the carbon chain has a double or triple bond, add the suffix ``ene'' or ``yne'' respectivly, always count the carbon chain to include the double or triple bond, additionally their counted location should be the lowest. Indicate the location of the bond before the suffix of the bond on the main chain. Multiple bonds are prefixed with di, tri, tetra, etc.
+\\
+
+For Example:
+\vspace{2mm}
+\begin{center}
+\schemestart
+\chemname{\chemfig{H_2C=CH-CH(-[2]CH_3)-CH_3}}{3-methylbut-1-ene}
+\hspace{10mm}
+\chemname{\chemfig{H_2C=CH-CH=CH-CH_3}}{dipent-1,3-ene}
+\schemestop
+\end{center}
+\vspace{4mm}
+\textbf{Cis and Trans}
+\\
+
+Cis and trans are stereoisomers, they have the same chemical formula and the same structural formula but they have a different arrangement of atoms in space. This is an important idea, because molecules that contain a double or triple bonds cannot freely rotate. Cis is the arrangement of the largest groups on the same side across a double or triple bond, and trans is when the largest groups are on opposites sides across a double or triple bond. Cis and trans are incdicated by ``cis-'' or ``trans-'' prefix.
+
+\vspace{4mm}
+For Example:
+\begin{center}
+  \schemestart
+  \chemname{cis-2-methylhex-3-ene}{\chemfig{H_3C - CH(-[1]CH_3) (-[7] CH=CH (-[1]CH_2-CH_3)  ) }}
+  \schemestop
+\end{center}
+
+\newpage
+
+\begin{center}
+  \schemestart
+  \chemname{\chemfig{ C(-[3]H_3C)(-[5]Br)=CH(-[7]CH_2-CH_3)}}{trans-2-bromopent-2-ene}
+  \schemestop
+\end{center}
+\vspace{4mm}
+Properties of Alkynes and Alkenes: Non Polar, MP and BP lower than Alkanes, reactivity greater than alkanes, exist in all states\\
+
+\noindent
+Reactivity of Alkynes and Alkenes: Addition.
+\\
+
+The Addition follows Markovnikov's Rule which states when an addition reaction  with a hydrogen hallide or water occurs and a double or triple bond exists, the added hydrogen will bond with the carbon with more hydrogens prior across the bond. In other words, the rich get richer in terms of hydrogen.
+\\
+
+For Example:
+\vspace{8mm}
+
+\begin{adjustbox}{center}
+  \schemestart
+  \chemname{\chemfig{C(-[3]CH_2(-[4]CH_3))(-[5]CH_3)=C(-[1]CH_2-CH_3)(-[7]CH_3)}}{3,4-dimethylhex-3-ene}
+  \+
+  \chemname{\chemfig{H-O(-[6]H)}}{water}
+  \arrow
+  \chemname{\chemfig{CH_3-CH_3-C(-[6]OH)(-[2]CH_3)-C(-[6]H)(-[2]CH_3)-CH_3-CH_3}}{3,4-dimethylhexanol}
+  \schemestop
+\end{adjustbox}
+
+\subsection{Alcohols}
+
+When an OH bond is present the molecule is considered to be an alcohol, this means the molecule is an alcohol.
+
+\end{paragraph}
+\end{document}
