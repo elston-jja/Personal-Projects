@@ -19,38 +19,30 @@ int main() {
   
   createEmptyGameboard();	                            // Create the board for playing based on queens
 
-  if ( processTurns(0) )                                    // Calls function to check if reclusive solution exists
-    {
-      printGameboard();                                     // Print out the valid gameboard solved
-    }
-  else
+  if ( !processTurns(0) )                                    // Calls function to check if reclusive solution exists
     {
       std::cout << "A solution does not exist" << std::endl;
     }
-
+  printGameboard();
   deleteGameboard();					    // Delete the gameboard pointers
-
   return 0;
 }
 
 bool processTurns(int queens){
 
-  if (queens == N){					    // Solved as there are as many queens as rows
+  if (queens >= N){					    // Solved as there are as many queens as rows
     return true;
   }
-
   for (int row = 0; row < N; row++) {		    // Run throught the columns
 
-    if (checkMove(row, queens)) {
-      
-      gameboard[row][queens] = 'Q';
-
-      if (processTurns(queens+1)) {
-	return true;
-      }
-      else {
-	gameboard[row][queens] = '~';
-      }
+    if (checkMove(row, queens))
+	{   
+		gameboard[row][queens] = 'Q';
+		if (processTurns(queens+1))
+		{
+			return true;
+		}
+		gameboard[row][queens] = 'R';
     }
   }
   return false;
