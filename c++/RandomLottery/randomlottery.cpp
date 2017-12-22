@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <time.h>
 #include <vector>
 #include <string>
@@ -32,4 +33,3 @@ int main() {
   return 0;
 }
 
-1/2*m1*vf1^2+1/2*m2*vf2^2=1/2*m1*vi1^2
