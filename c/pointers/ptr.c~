@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+    int *ptr;
+    int var;
+
+    var = 2;
+
+    ptr = &var;
+
+    printf("The value of var is %d",*ptr);
+
+    return 0;
+}
